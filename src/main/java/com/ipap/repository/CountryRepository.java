@@ -4,7 +4,7 @@ import com.ipap.springsoap.gen.Country;
 import com.ipap.springsoap.gen.Currency;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
