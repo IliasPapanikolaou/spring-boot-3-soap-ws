@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.ipap.com"
-           targetNamespace="http://www.ipap.com" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.ipap.com/springsoap/gen"
+           targetNamespace="http://www.ipap.com/springsoap/gen" elementFormDefault="qualified">
 
     <xs:element name="getCountryRequest">
         <xs:complexType>

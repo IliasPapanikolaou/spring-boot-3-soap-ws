@@ -1,7 +1,7 @@
 package com.ipap.repository;
 
-import com.ipap.Country;
-import com.ipap.Currency;
+import com.ipap.springsoap.gen.Country;
+import com.ipap.springsoap.gen.Currency;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

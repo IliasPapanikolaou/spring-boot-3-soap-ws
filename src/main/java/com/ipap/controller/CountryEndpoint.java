@@ -1,8 +1,8 @@
 package com.ipap.controller;
 
-import com.ipap.GetCountryRequest;
-import com.ipap.GetCountryResponse;
 import com.ipap.repository.CountryRepository;
+import com.ipap.springsoap.gen.GetCountryRequest;
+import com.ipap.springsoap.gen.GetCountryResponse;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -11,7 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class CountryEndpoint {
 
-    private static final String NAMESPACE_URI = "http://www.ipap.com";
+    private static final String NAMESPACE_URI = "http://www.ipap.com/springsoap/gen";
 
     private final CountryRepository countryRepository;
 
