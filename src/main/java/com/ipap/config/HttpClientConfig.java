@@ -1,5 +1,6 @@
 package com.ipap.config;
 
+import org.apache.http.auth.AuthScope;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.CookieSpecs;
@@ -12,6 +13,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.transport.WebServiceMessageSender;
+import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
 import java.util.concurrent.TimeUnit;
 
@@ -62,5 +66,26 @@ public class HttpClientConfig {
                 .build());
 
         return clientContext;
+    }
+
+    /**
+     * Older implementation - for checking compatibility with SB3
+     * @return WebServiceTemplate
+     */
+    @Bean
+    public WebServiceTemplate webServiceTemplate(WebServiceMessageSender messageSender) {
+        WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
+        webServiceTemplate.setMessageSender(messageSender);
+        return webServiceTemplate;
+    }
+
+    @Bean
+    public WebServiceMessageSender messageSender() {
+        HttpComponentsMessageSender messageSender = new HttpComponentsMessageSender();
+        messageSender.setAuthScope(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT));
+        // messageSender.setCredentials();
+        messageSender.setConnectionTimeout(10000);
+        messageSender.setReadTimeout(10000);
+        return messageSender;
     }
 }
