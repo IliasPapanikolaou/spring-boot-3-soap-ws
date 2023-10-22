@@ -3,8 +3,10 @@ package com.ipap.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ipap.client.CountryHttpClient;
+import com.ipap.client.CountryWsHttpClient;
 import com.ipap.repository.CountryRepository;
 import com.ipap.springsoap.gen.Country;
+import com.ipap.springsoap.gen.GetCountryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,13 @@ public class CountryController {
 
     private final CountryHttpClient countryHttpClient;
     private final CountryRepository countryRepository;
+    private final CountryWsHttpClient countryWsHttpClient;
 
-    public CountryController(CountryHttpClient countryHttpClient, CountryRepository countryRepository) {
+    public CountryController(CountryHttpClient countryHttpClient, CountryRepository
+            countryRepository, CountryWsHttpClient countryWsHttpClient) {
         this.countryHttpClient = countryHttpClient;
         this.countryRepository = countryRepository;
+        this.countryWsHttpClient = countryWsHttpClient;
     }
 
     // Called internally by HttpClient
@@ -64,5 +69,10 @@ public class CountryController {
         }
         String name = node.get("name").textValue();
         return countryHttpClient.getCountryPostMethod(name);
+    }
+
+    @GetMapping("/countries/ws-test-invoke/{name}")
+    public GetCountryResponse invokeWsCountryByName(@PathVariable String name) {
+        return countryWsHttpClient.getCountriesWs(name);
     }
 }
